@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include<time.h>
+#include <time.h>
 
 using namespace std;
 
@@ -9,7 +9,6 @@ void user_input()
 {
 	string b[100];
 	cout<<" enter the words you can make ";
-	gets(b);
 }
 
 void start()
@@ -40,9 +39,9 @@ int main () {
   {
     while ( getline (myfile,line) )
     {
-      //cout << line << '\n';
-      if(i<10000)
-		a[i]=line;
+      cout << line << '\n';
+      //if(i<10000)
+		//a[i]=line;
 	//cout<<a[i]<<endl;
 	++i;
     }
@@ -50,7 +49,7 @@ int main () {
   }
 
   else cout << "Unable to open file"; 
-//  start();
+// start();
   
   
 
