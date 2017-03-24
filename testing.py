@@ -1,11 +1,11 @@
 #python project AAT2 made by Ayush Goyal and Bipin D R
-#Under Guidance of Mrs. Bhanupriya Ma'am
 #Word game
 
 
 from tkinter import *
 import time
 import itertools
+import random
 
 root = Tk()
 
@@ -17,7 +17,7 @@ userlist = []
 wordslist=[]
 dictionarylist=[]
 
-letterlist=['a','g','o','d','h']
+letterlist=[]
 
 legitlist=[]
 
@@ -26,9 +26,16 @@ correctlist=[]
 noofwordspossible=0
 myscore=0
 
+def rangen():
+    j = random.choice([5,6,7])
+    for i in range(0,j):
+        ch = random.choice('abcdefghijklmnopqrstuvwxyz')
+        letterlist.append(ch)
+    print(letterlist)
+    
 
 def generatelist():
-    for i in range(2, len(letterlist) + 1):
+    for i in range(3, len(letterlist) + 1):
         for word in itertools.permutations(letterlist, i):
             wordslist.append(''.join(word))
 
@@ -54,13 +61,16 @@ def score():
     print(noofwordspossible)
     print(myscore)
     l6 = Label(gg, text="Words possible: " + str(legitlist)).grid(row=6, column=0)
-    l5 = Label(gg, text="Number of words possible "+ str(noofwordspossible)).grid(row=7, column=0)
+    l5 = Label(hh, text="Number of words possible "+ str(noofwordspossible)).grid(row=7, column=0)
     l7 = Label(gg,text=" YOUR SCORE " + str(myscore),font=("Helvetica", 16)).grid(row=8, column=0)
 
 def buttoncalled(labl):
     def countit():
         global counter
         counter = counter-1
+        ranwords = Label(gg,text="The random letters are :").grid(row=1,column=0)
+        ranwords = Label(gg,text=letterlist,font=("Helvetica",20)).grid(row=2,column=0)
+
         labl.config(text=" Time remaining: " + str(counter), padx=10, pady=10)
         if counter!=0:
             labl.after(1000, countit)
@@ -79,15 +89,16 @@ def gettingtext():
     userlist.append(e1.get())
     l5 = Label(gg, text="entered words are " + str(userlist)).grid(row=5, column=0)
     e1.delete(0, END)
-
+rangen()
 generatelist()
 a = StringVar()
 
 w = Frame(root, relief=SUNKEN, width=750, height=450)
 w.pack(side=TOP, anchor=CENTER)
 gg = Frame(root, relief=SUNKEN, width=750, height=450)
+hh = Frame(root,bg="red")
 gg.pack(anchor=CENTER)
-l1 = Label(w, text=" WORD GAME ", font=("Helvetica", 20)).grid(padx=5, pady=20)
+l1 = Label(w, text=" WORD GAME ", font=("Helvetica", 30)).grid(padx=5, pady=20)
 l2 = Label(gg)
 b1 = Button(w, text=" Start Game ", width=20, height=3, command=lambda: buttoncalled(l2)).grid(padx=5, pady=10)
 l2.grid(row=0, column=0)
