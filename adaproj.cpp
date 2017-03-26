@@ -36,7 +36,7 @@ void bsearch()
             {
                 properwords[properlen]=dictiwords[mid];
                 ++properlen;
-                cout<<"pro "<<properwords[properlen-1];
+                //cout<<"pro "<<properwords[properlen-1];
             }
             if(dictiwords[mid].compare(combiwords[j])>0)
                 high = mid-1;
@@ -44,9 +44,10 @@ void bsearch()
                 low = mid+1;
         }
     }
+    
 
     for(j=0;j<properlen;++j)
-        cout<<properwords[j]<<endl;
+    	cout<<properwords[j]<<endl;
     cout<<"ths is printed";
 }
 

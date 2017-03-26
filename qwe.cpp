@@ -36,7 +36,7 @@ void bsearch()
             {
                 properwords[properlen]=dictiwords[mid];
                 ++properlen;
-                cout<<"pro "<<properwords[properlen-1];
+                //cout<<"pro "<<properwords[properlen-1];
             }
             if(dictiwords[mid].compare(combiwords[j])>0)
                 high = mid-1;
@@ -45,8 +45,10 @@ void bsearch()
         }
     }
 
+    dic
+
     for(j=0;j<properlen;++j)
-        cout<<properwords[j]<<endl;
+    	cout<<properwords[j]<<endl;
     cout<<"ths is printed";
 }
 
@@ -58,7 +60,7 @@ void findWordsUtil(char boggle[M][N], bool visited[M][N], int i,
 	// to str
 	visited[i][j] = true;
 	str = str + boggle[i][j];
-	
+
 	// If str is present in dictionary, then print it
 		//cout << str << endl;
 
@@ -131,7 +133,7 @@ int main ()
 
   int i=0;
   string line,line2;
-  
+
 
   ifstream myfile ("ren.txt");
   if (myfile.is_open())
@@ -185,5 +187,4 @@ bsearch();
 
   return 0;
 }
-
 
