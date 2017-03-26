@@ -1,3 +1,4 @@
+//ADA PROJECT BY BIPIN D R AND AYUSH GOYAL
 #include <iostream>
 #include <fstream>
 #include <string.h>
@@ -10,12 +11,31 @@ using namespace std;
 ofstream f1;
 
 string dictiwords[100000],combiwords[20000];
-string properwords[10000];
+string properwords[10000],userwords[20],userin[100],temp[10000];
 string bos;
-// Let the given dictionary be following
-//string dictionary[] = {"GEEKS", "FOR", "QUIZ", "GO"};
 
-int dictlen=0,userlen=0,properlen=0,combilen=0;
+int dictlen=0,userlen=0,properlen=0,combilen=0,ulen=0,templen=0;
+
+void singleout()
+{
+	int flag=0;
+	int j,k;
+	for(j=0;j<templen;++j)
+	{
+		for(k=j+1;k<templen;++k)
+		{
+			if(temp[j].compare(temp[k])==0)
+				flag=1;
+		}
+		if(flag==0)
+		{
+			properwords[properlen]=temp[j];
+			++properlen;
+		}
+		flag=0;
+	}
+}
+
 
 void bsearch()
 {
@@ -28,15 +48,14 @@ void bsearch()
         low = 0;
         high = n-1;
         mid = (low+high)/2;
-
-        while(low<high)
+        while(low<=high)
         {
         	mid = (low+high)/2;
             if(dictiwords[mid].compare(combiwords[j])==0)
             {
-                properwords[properlen]=dictiwords[mid];
-                ++properlen;
-                //cout<<"pro "<<properwords[properlen-1];
+                temp[templen]=dictiwords[mid];
+                ++templen;
+                break;
             }
             if(dictiwords[mid].compare(combiwords[j])>0)
                 high = mid-1;
@@ -45,10 +64,34 @@ void bsearch()
         }
     }
     
-
+	singleout();
+	cout<<"\nThe words that could be formed are: \n";
     for(j=0;j<properlen;++j)
-    	cout<<properwords[j]<<endl;
-    cout<<"ths is printed";
+    	cout<<properwords[j]<<" , ";
+}
+
+void lsearch()
+{
+	int n = properlen;
+    int i=0,j=0;
+    for(i=0;i<userlen;i++)
+    {
+        for(j=0;j<n;j++)
+        {
+            if(properwords[j].compare(userin[i])==0)
+            {
+                userwords[ulen]=properwords[j];
+                ulen++;
+            }
+        }
+    }
+
+	cout<<"\n\n\n You have entered: \n";
+    for(j=0;j<userlen;++j)
+    {
+    	cout<<userin[j]<<" ,";
+    }
+    cout<<"\n\nYOUR SCORE IS "<<ulen<<" OUT OF "<<properlen;
 }
 
 // A recursive function to print all words present on boggle
@@ -59,7 +102,7 @@ void findWordsUtil(char boggle[M][N], bool visited[M][N], int i,
 	// to str
 	visited[i][j] = true;
 	str = str + boggle[i][j];
-	
+
 	// If str is present in dictionary, then print it
 		//cout << str << endl;
 
@@ -94,55 +137,45 @@ void findWords(char boggle[M][N])
 			findWordsUtil(boggle, visited, i, j, str);
 }
 
-/*void user_input()
-{
-	string userin[100];
-	cout<<" enter the words you can make ";
-	cin>>userin[i];
-	i++;
-
-}*/
 
 void start()
 {
 	double duration=0;
-	string userin[100];
-	int i=0;
 	clock_t tstart = clock();
 	cout<<" enter the words you can make ";
-	while(duration<3)
+	while(duration<10)
 	{
-	    cin>>userin[i];
+	    cin>>userin[userlen];
         userlen++;
 
     /* Your algorithm here */
 
     duration = ( clock() - tstart ) / (double) CLOCKS_PER_SEC;
 
-	//if(((int)duration%10.000)==0)
-    //	cout<< duration <<'\n';
 	}
-
-
 
 }
 
 int main ()
 {
 
-  int i=0;
+  int i=0,j=0;
   string line,line2;
   
+  unsigned seed= time(0);
+  srand(seed);
 
-  ifstream myfile ("ren.txt");
+	cout<<"\n\n \t\t ADA PROJECT BY BIPIN D R AND AYUSH GOYAL\n\n ";
+  ifstream myfile ("small.txt");
   if (myfile.is_open())
   {
     while ( getline (myfile,line) )
     {
-      //cout << line << '\n';
-		dictiwords[dictlen]=line;
-	//cout<<a[i]<<endl;
-	++dictlen;
+    	if(line.size()>2)
+		{
+			dictiwords[dictlen]=line;
+			++dictlen;
+		}
     }
     myfile.close();
   }
@@ -153,7 +186,18 @@ int main ()
 	char boggle[M][N] = {{'g','i','z'},
 						{'u','e','k'},
 						{'q','s','e'}};
+/*
+	char boggle[3][3];
+	for(i=0;i<3;++i)
+	{
+		for(j=0;j<3;++j)
+		{
+				boggle[i][j] = 97 + rand()%26;
+		}
+	}
+*/
 	findWords(boggle);
+	cout<<endl;
 	for(int j=0;j<M;j++)
     {
         for(int k=0;k<N;k++)
@@ -180,10 +224,9 @@ int main ()
 	//cout << "Following words of dictionary are present\n";
 	f1.close();
 start();
-cout<<dictlen<<"   "<<combilen;
 bsearch();
+lsearch();
 
 
   return 0;
 }
-
