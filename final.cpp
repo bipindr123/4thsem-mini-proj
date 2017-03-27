@@ -143,7 +143,7 @@ void start()
 	double duration=0;
 	clock_t tstart = clock();
 	cout<<" enter the words you can make ";
-	while(duration<10)
+	while(duration<30)
 	{
 	    cin>>userin[userlen];
         userlen++;
@@ -183,10 +183,10 @@ int main ()
   f1.open("DFGH.txt");
 
 //function to generate combinations
-	char boggle[M][N] = {{'g','i','z'},
-						{'u','e','k'},
-						{'q','s','e'}};
-/*
+//	char boggle[M][N] = {{'g','i','z'},
+//						{'u','e','k'},
+//						{'q','s','e'}};
+
 	char boggle[3][3];
 	for(i=0;i<3;++i)
 	{
@@ -195,7 +195,6 @@ int main ()
 				boggle[i][j] = 97 + rand()%26;
 		}
 	}
-*/
 	findWords(boggle);
 	cout<<endl;
 	for(int j=0;j<M;j++)

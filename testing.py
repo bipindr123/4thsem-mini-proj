@@ -19,8 +19,9 @@ userlist = []
 wordslist=[]
 dictionarylist=[]
 
-letterlist=[]
+letterlistcpy=[]
 
+letterlist=[]
 legitlist=[]
 
 correctlist=[]
@@ -33,9 +34,19 @@ def rangen():
     j = random.choice([5,6,7])
     for i in range(0,j):
         ch = random.choice('abcdefghijklmnopqrstuvwxyz')
-        letterlist.append(ch)
-    print(letterlist)
+        letterlistcpy.append(ch)
+    print(letterlistcpy)
+ 
+    for i in range(0,len(letterlistcpy)):
+        flag=0
+        for j in range(i+1,len(letterlistcpy)):
+            if letterlistcpy[i]==letterlistcpy[j]:
+                flag=1
+        if flag == 0:
+            letterlist.append(letterlistcpy[i])
     generatelist()
+   
+
 
 #function for genreating list of all possbile combinations from the given words
 def generatelist():
@@ -64,9 +75,11 @@ def findletters():
         dictionarylist.clear()
         letterlist.clear()
         wordslist.clear()
+        letterlistcpy.clear()
         rangen()
     else:
         loadit.config(text="done")
+        
 #funcition to check how many the user got correct and then assign a score
 def score():
     for i in userlist:
@@ -89,7 +102,7 @@ def startgame(labl):
         ranwords = Label(gg,text="The random letters are :").grid(row=1,column=0)
         ranwords = Label(gg,text=letterlist,font=("Helvetica",20)).grid(row=2,column=0, pady=10, padx=15)
 
-        labl.config(text=" Time remaining: " + str(counter), padx=10, pady=30)
+        labl.config(text=" Time remaining: " + str(counter), padx=20, pady=30)
         if counter!=0:
             labl.after(1000, countit)
             print(userlist)
@@ -108,7 +121,7 @@ def gettingtext():
     l5 = Label(gg, text="entered words are " + str(userlist)).grid(row=5, column=0, pady=10, padx=15)
     e1.delete(0, END)
 
-
+#doing gui using tkinter 
 
 a = StringVar()
 w = Frame(root, relief=SUNKEN)
