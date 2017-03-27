@@ -18,9 +18,6 @@ counter = 30
 userlist = []
 wordslist=[]
 dictionarylist=[]
-
-letterlistcpy=[]
-
 letterlist=[]
 legitlist=[]
 
@@ -34,16 +31,13 @@ def rangen():
     j = random.choice([5,6,7])
     for i in range(0,j):
         ch = random.choice('abcdefghijklmnopqrstuvwxyz')
-        letterlistcpy.append(ch)
-    print(letterlistcpy)
- 
-    for i in range(0,len(letterlistcpy)):
-        flag=0
-        for j in range(i+1,len(letterlistcpy)):
-            if letterlistcpy[i]==letterlistcpy[j]:
-                flag=1
-        if flag == 0:
-            letterlist.append(letterlistcpy[i])
+        letterlist.append(ch)
+    print(letterlist)
+#removes duplicate elements
+    for i in letterlist:
+        if letterlist.count(i)>1:
+            del letterlist[letterlist.index(i)]
+
     generatelist()
    
 
@@ -75,7 +69,6 @@ def findletters():
         dictionarylist.clear()
         letterlist.clear()
         wordslist.clear()
-        letterlistcpy.clear()
         rangen()
     else:
         loadit.config(text="done")
