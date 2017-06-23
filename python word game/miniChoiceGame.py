@@ -10,14 +10,22 @@
 import time
 import random
 import sys
-import colors
 
 yes = ['y', 'Y', 'Yes', 'YES', 'yes']
-no =['n', 'N', 'No', 'NO', 'no']
+no = ['n', 'N', 'No', 'NO', 'no']
 right = ['r', 'R', 'Right', 'RIGHT', 'right']
 left = ['l', 'L', 'Left', 'LEFT', 'left']
 
+battleover = 0
+gundoor = 0
+survival = 0
+takem = 0
+gun = 0
+stick = 0
+
+
 def creature():
+    global battleover, gundoor, survival, takem, gun, stick
     print("As you proceed futher, you begin to make out two green, glowing, menacing eyes!")
     time.sleep(1)
     print("The eyes belong to an oversized creature resembling a gaint creature!")
@@ -29,7 +37,7 @@ def creature():
             print("You quickly shoot the creature in it's eye and weaken it")
             time.sleep(2)
         else:
-             print("You quickly kick the creature in it's face, stunning it and gaining an advnatage over it.")
+            print("You quickly kick the creature in it's face, stunning it and gaining an advnatage over it.")
         print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
         print("                               Fighting...                   ")
         print("                      THE CREATURE BEGINS TO ATTACK")
@@ -44,20 +52,20 @@ def creature():
         print("the creature hits you with attack level of", ai)
         time.sleep(2)
 
-        if ai > player and ch3 in ['y', 'Y', 'Yes', 'YES', 'yes']:
+        if ai > player and ch3 in yes:
             print("The creature has dealt more damage than you!")
             battleover = 1
             survival = 0
             takem = 0
 
-        elif ai == player and ch3 in ['y', 'Y', 'Yes', 'YES', 'yes']:
+        elif ai == player and ch3 in yes:
             print(
                 "You didn't do enough damage to kill the creature, but you manage to escape and run futher down the path.")
             battleover = 1
             survival = 1
             takem = 0
 
-        elif player > ai and ch3 in ['y', 'Y', 'Yes', 'YES', 'yes']:
+        elif player > ai and ch3 in yes:
             print("You killed the creature!")
             battleover = 1
             survival = 1
@@ -66,14 +74,7 @@ def creature():
         print("The creature crawls past you and you walk futher down the path.")
         survival = 1
 
-#start of game
-battleover = 0
-gundoor = 0
-survival = 0
-takem = 0
-gun = 0
-stick = 0
-sys.stdout.write(RED)
+
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 print("Welcome to the space text advanture game! VERSION 2.0")
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
@@ -92,8 +93,6 @@ if ch1 in yes:
 else:
     print("You did not take the weapon.")
     stick = 1
-
-sys.stdout.write(REVERSE + CYAN)
 
 print(
     "As you proceed further into the space station, you reach an intersection between two paths. The path leading left is in complete darkness, the path leading right is also in complete darkness apart from the occasional flicker of some overhead lights.")
@@ -124,7 +123,7 @@ if ch2 in left:
             print("The eyes belong to an oversized creature resembling a giant spider!")
             ch3 = str(input("It starts to creep towards you. Do you try to fight it? [Y/N]"))
             # machine gun and creature fight
-            if takem==1:
+            if takem == 1:
                 print("You shoot your machine gun and the creature instantly dies.")
                 survival = 1
             else:
@@ -155,13 +154,12 @@ else:
         "There are 7 correct numbers. If you pick a number which is the same as of one of those 7 numbers you will survive.")
     print("If you pick a wrong number you will die.")
     number = int(input("What number do you choose?"))
-    if number in [10,9,8,7,6]:
+    if number in [10, 9, 8, 7, 6]:
         print("That is the correct number! You manage to kill all the creatures and survive!")
     else:
         print("That is the incorrect number. The creatures kill you.")
         print("GAME OVER YOU DIED")
         sys.exit()
-
 
 print(
     "You walk on until you reach an open door. You walk through the open door and reach the control room of the space station. The computer systems infrom you that the ship's thrusters are damaged.")
